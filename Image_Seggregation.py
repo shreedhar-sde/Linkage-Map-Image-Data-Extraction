@@ -57,7 +57,25 @@ import numpy as np
 def find_and_mark_regions(image_path):
   img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
   img_o2 = cv2.imread(image_path, cv2.IMREAD_COLOR)
-  _, binary_img = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY)  # Simple threshold
+  # _, binary_img = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY)  # Simple threshold
+#   binary_img = cv2.adaptiveThreshold(
+#     img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+# )
+#   _, binary_img = cv2.threshold(
+#     img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+# )
+  # blurred_img = cv2.GaussianBlur(img, (5, 5), 0)
+  # contrast_img=cv2.equalizeHist(blurred_img)
+  binary_img = cv2.adaptiveThreshold(
+    img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+# # Optional: Dilation/erosion
+#   kernel = np.ones((1, 1), np.uint8)
+#   binary_img = cv2.dilate(binary_img, kernel, iterations=1)
+
+
+
   sample_rows=[2,3,4,6,7]
   scale=[]
   markers=[]
@@ -127,3 +145,5 @@ for i in cleaned_extract:
   if i.replace(' ',''):
     cleaned_extract_f.append(i)
 print(cleaned_extract_f)
+print(len(cleaned_extract_f))
+print(len(final_text.split("\n")))
