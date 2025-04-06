@@ -47,6 +47,10 @@ def remove_control_characters(s):
     return "".join(ch for ch in s if unicodedata.category(ch) and unicodedata.category(ch)[0] != "C")
 
 
+# Here I take the Linkage map image and try to find and segmemtize different maps in an image
+# I grayscale the image and take the mid portion of the image and use the above mentioned logic for segmentization
+# I draw the lines to see whether the algorithm is able to segmentize the image
+
 import cv2
 import numpy as np
 
@@ -86,6 +90,13 @@ def find_and_mark_regions(image_path):
 image_file = "/content/lm 4.jpg"  # Replace with the actual image path.
 
 bi_s,bi_m=find_and_mark_regions(image_file)
+
+
+
+
+
+# Here I use OCR to detect Words and Digits
+
 
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = (
